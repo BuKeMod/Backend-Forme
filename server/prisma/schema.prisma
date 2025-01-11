@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // เปลี่ยนเป็น "postgresql" หรือ "sqlite" ตามฐานข้อมูลของคุณ
+  url      = env("DATABASE_URL") // ใช้ตัวแปร environment สำหรับเชื่อมต่อฐานข้อมูล
+}
+
+model User {
+  id         Int      @id @default(autoincrement()) // Primary Key
+  username   String   @unique                      // ชื่อผู้ใช้ต้องไม่ซ้ำ
+  email      String   @unique                      // อีเมลต้องไม่ซ้ำ
+  password   String                               // รหัสผ่าน (แฮชแล้ว)
+  createdAt  DateTime @default(now())             // วันที่สร้าง
+  updatedAt  DateTime @updatedAt                  // อัปเดตอัตโนมัติเมื่อแก้ไข
+  role       String   @default("user")            // บทบาท เช่น user หรือ admin
+  isActive   Boolean  @default(true)              // สถานะการใช้งาน
+}
