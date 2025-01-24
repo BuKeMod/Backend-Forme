@@ -1,7 +1,7 @@
 import prisma from '../config/prisma.js';
 import handleError from '../utils/errorHandler.js';
 
-export const getUserDetails = async (req, res) => {
+const getUserDetails = async (req, res) => {
     try {
         const userId = req.user.id; // รับข้อมูล User ID จาก Token ที่ Middleware เพิ่มเข้าไปใน req.user
         const user = await prisma.user.findUnique({
@@ -25,3 +25,5 @@ export const getUserDetails = async (req, res) => {
         handleError(res,500,'Failed to retrieve user details.');
     }
 };
+
+export default getUserDetails

@@ -21,7 +21,7 @@ const create = async (req, res) => {
         });
         res.json({
             msg: "create user success",
-            user
+            // user
         });
     } catch (error) {
 
